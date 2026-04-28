@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="FameThrower Universe — Original anime characters. Official merchandise. She doesn't throw flames. She throws FAME.">
+<meta property="og:title" content="The FameThrower Universe">
+<meta property="og:description" content="She doesn't throw flames — she throws FAME. ⭐ Official merch now live.">
+<title>FameThrower Universe ⭐🔥</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --flame-red:    #D93025;
+  --flame-orange: #E8690A;
+  --ember:        #FF9B21;
+  --gold:         #F5C518;
+  --deep:         #080412;
+  --void:         #0E0720;
+  --nebula:       #1A0A38;
+  --purple-dim:   #2D1060;
+  --star:         #C8A8FF;
+  --mist:         rgba(200,168,255,0.12);
+  --text-bright:  #FFF8F0;
+  --text-mid:     rgba(255,248,240,0.7);
+  --text-dim:     rgba(255,248,240,0.4);
+  --card-glass:   rgba(255,248,240,0.04);
+  --card-border:  rgba(255,248,240,0.08);
+  --glow-orange:  rgba(232,105,10,0.35);
+  --glow-gold:    rgba(245,197,24,0.25);
+}
+
+/* ═══════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--deep);
+  color: var(--text-bright);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ═══════════════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════════════ */
+.cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--ember);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+  mix-blend-mode: screen;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(232,105,10,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.15s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
+}
+body:hover .cursor { opacity: 1; }
+
+/* ═══════════════════════════════════════════════
+   CANVAS PARTICLE FIELD
+═══════════════════════════════════════════════ */
+#cosmos {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════
+   GRAIN OVERLAY
+═══════════════════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
+}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: linear-gradient(to bottom, rgba(8,4,18,0.95), transparent);
+  backdrop-filter: blur(12px);
+  transition: background 0.4s;
+}
+nav.scrolled {
+  background: rgba(8,4,18,0.96);
+  border-bottom: 1px solid var(--card-border);
+}
+.nav-logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--ember), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--ember);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--text-bright); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  background: linear-gradient(135deg, var(--flame-red), var(--ember));
+  color: white !important;
+  padding: 10px 24px !important;
+  border-radius: 40px;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  transition: box-shadow 0.3s, transform 0.3s !important;
+  box-shadow: 0 0 0 rgba(232,105,10,0);
+}
+.nav-cta:hover {
+  box-shadow: 0 0 32px var(--glow-orange) !important;
+  transform: translateY(-2px) !important;
+}
+.nav-cta::after { display: none !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--text-bright); border-radius: 2px; transition: 0.3s; }
+
+/* ═══════════════════════════════════════════════
+   SECTIONS WRAPPER
+═══════════════════════════════════════════════ */
+main { position: relative; z-index: 10; }
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ember glow radials */
+#hero::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(216,48,37,0.18) 0%, transparent 65%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -55%);
+  animation: pulse-hero 6s ease-in-out infinite;
+}
+#hero::after {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(245,197,24,0.1) 0%, transparent 65%);
+  top: 60%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-hero 6s ease-in-out infinite reverse;
+}
+@keyframes pulse-hero {
+  0%,100% { transform: translate(-50%,-55%) scale(1); opacity: 0.7; }
+  50% { transform: translate(-50%,-55%) scale(1.15); opacity: 1; }
+}
+
+.hero-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 28px;
+  font-weight: 500;
+  opacity: 0;
+  animation: reveal-up 1s 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2.8rem, 8vw, 7.5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: reveal-up 1s 0.4s forwards;
+}
+
+.hero-title .line-flame {
+  background: linear-gradient(135deg, var(--flame-red) 0%, var(--ember) 40%, var(--gold) 80%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: shimmer 4s ease-in-out infinite, reveal-up 1s 0.4s forwards;
+}
+@keyframes shimmer {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero-title .line-universe {
+  display: block;
+  font-size: 0.42em;
+  letter-spacing: 0.35em;
+  color: var(--star);
+  -webkit-text-fill-color: var(--star);
+  margin-top: 12px;
+}
+
+.hero-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 3vw, 1.9rem);
+  font-style: italic;
+  color: var(--text-mid);
+  margin: 32px 0 48px;
+  opacity: 0;
+  animation: reveal-up 1s 0.6s forwards;
+}
+.hero-tagline strong { color: var(--ember); font-style: normal; }
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  animation: reveal-up 1s 0.8s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--flame-red), var(--ember));
+  color: white;
+  text-decoration: none;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+  box-shadow: 0 8px 40px rgba(216,48,37,0.3);
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 16px 60px rgba(216,48,37,0.5);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-bright);
+  text-decoration: none;
+  padding: 15px 36px;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--card-border);
+  transition: all 0.3s;
+  backdrop-filter: blur(8px);
+}
+.btn-ghost:hover {
+  border-color: rgba(255,248,240,0.3);
+  background: var(--mist);
+  transform: translateY(-3px);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: reveal-up 1s 1.2s forwards;
+}
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--ember), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%,100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+.scroll-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION COMMONS
+═══════════════════════════════════════════════ */
+section { padding: 120px 48px; position: relative; }
+
+.section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ember);
+  font-weight: 500;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.section-heading {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.section-heading .accent {
+  background: linear-gradient(90deg, var(--ember), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-body {
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  line-height: 1.85;
+  max-width: 600px;
+}
+
+/* Divider line */
+.divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--flame-red), var(--ember));
+  margin: 24px 0 40px;
+  border-radius: 2px;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+@keyframes reveal-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════
+   TICKER TAPE
+═══════════════════════════════════════════════ */
+.ticker-wrap {
+  background: linear-gradient(135deg, var(--flame-red), var(--ember));
+  padding: 14px 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 30s linear infinite;
+}
+.ticker-item {
+  padding: 0 40px;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.9);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.ticker-item::after {
+  content: '⭐';
+  font-size: 0.9rem;
+}
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ═══════════════════════════════════════════════
+   STORY SECTION
+═══════════════════════════════════════════════ */
+#story {
+  background: linear-gradient(180deg, var(--deep) 0%, var(--void) 100%);
+}
+.story-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.story-visual {
+  position: relative;
+}
+.story-char-frame {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 40px;
+  background: linear-gradient(135deg, rgba(216,48,37,0.15), rgba(245,197,24,0.08));
+  border: 1px solid rgba(232,105,10,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(8rem, 20vw, 16rem);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 120px rgba(216,48,37,0.15), inset 0 0 80px rgba(245,197,24,0.05);
+}
+.story-char-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 60% 40%, rgba(232,105,10,0.2), transparent 60%);
+  animation: char-glow 4s ease-in-out infinite;
+}
+@keyframes char-glow {
+  0%,100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.story-char-emoji { position: relative; z-index: 1; animation: float 5s ease-in-out infinite; }
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
+}
+.story-badge {
+  position: absolute;
+  bottom: -16px; right: -16px;
+  background: linear-gradient(135deg, var(--flame-red), var(--ember));
+  border-radius: 20px;
+  padding: 16px 24px;
+  box-shadow: 0 8px 40px rgba(216,48,37,0.4);
+}
+.story-badge-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.1em;
+  margin-bottom: 2px;
+}
+.story-badge-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: white;
+}
+.story-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-bright);
+  margin: 32px 0;
+  padding-left: 24px;
+  border-left: 3px solid var(--ember);
+}
+.story-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 40px;
+}
+.stat-box {
+  background: var(--card-glass);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.3s, transform 0.3s;
+}
+.stat-box:hover { border-color: rgba(232,105,10,0.4); transform: translateY(-4px); }
+.stat-num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, var(--ember), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════
+   CHARACTERS SECTION
+═══════════════════════════════════════════════ */
+#characters {
+  background: var(--void);
+}
+.chars-header {
+  max-width: 1200px;
+  margin: 0 auto 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.chars-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.char-card {
+  background: var(--card-glass);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 32px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  backdrop-filter: blur(8px);
+}
+.char-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--char-glow, rgba(232,105,10,0.1));
+  opacity: 0;
+  transition: opacity 0.4s;
+  border-radius: 24px;
+}
+.char-card:hover { transform: translateY(-12px); border-color: var(--char-accent, rgba(232,105,10,0.4)); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+.char-card:hover::before { opacity: 1; }
+.char-card.featured {
+  grid-row: span 1;
+  border-color: rgba(232,105,10,0.3);
+  background: linear-gradient(135deg, rgba(216,48,37,0.12), rgba(245,197,24,0.06));
+}
+.char-emoji-wrap {
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s;
+}
+.char-card:hover .char-emoji-wrap { transform: scale(1.2) rotate(5deg); }
+.char-name-tag {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+.char-element {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+.char-power-pill {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 30px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: white;
+  background: var(--char-accent, rgba(232,105,10,0.5));
+  position: relative;
+  z-index: 1;
+}
+.char-coming {
+  position: absolute;
+  top: 12px; right: 12px;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: var(--mist);
+  padding: 3px 10px;
+  border-radius: 30px;
+  border: 1px solid var(--card-border);
+}
+
+/* ═══════════════════════════════════════════════
+   MERCH SECTION
+═══════════════════════════════════════════════ */
+#merch {
+  background: linear-gradient(180deg, var(--void) 0%, var(--nebula) 100%);
+}
+.merch-inner { max-width: 1200px; margin: 0 auto; }
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+.merch-card {
+  background: var(--card-glass);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.4s;
+  position: relative;
+  backdrop-filter: blur(12px);
+}
+.merch-card:hover { transform: translateY(-8px); box-shadow: 0 32px 80px rgba(0,0,0,0.4); border-color: rgba(232,105,10,0.3); }
+.merch-img {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.merch-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, var(--card-glass) 100%);
+}
+.merch-body { padding: 24px; }
+.merch-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.merch-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.merch-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; }
+.merch-footer { display: flex; align-items: center; justify-content: space-between; }
+.merch-price {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+}
+.merch-btn {
+  background: linear-gradient(135deg, var(--flame-red), var(--ember));
+  color: white;
+  padding: 9px 20px;
+  border-radius: 30px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+  letter-spacing: 0.05em;
+}
+.merch-btn:hover { box-shadow: 0 8px 24px var(--glow-orange); transform: translateY(-2px); }
+.merch-badge {
+  position: absolute;
+  top: 16px; left: 16px;
+  background: linear-gradient(135deg, var(--flame-red), var(--ember));
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 30px;
+  box-shadow: 0 4px 16px rgba(216,48,37,0.4);
+}
+
+/* ═══════════════════════════════════════════════
+   UNIVERSE MAP
+═══════════════════════════════════════════════ */
+#universe {
+  background: var(--nebula);
+  text-align: center;
+}
+.universe-inner { max-width: 900px; margin: 0 auto; }
+.universe-map {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 64px 0;
+}
+.map-node {
+  background: var(--card-glass);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+.map-node:hover { transform: scale(1.04); border-color: rgba(232,105,10,0.35); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.map-node::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: var(--node-glow, rgba(232,105,10,0.2));
+  filter: blur(30px);
+}
+.map-icon { font-size: 2.5rem; margin-bottom: 12px; display: block; }
+.map-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.85rem;
+  color: var(--ember);
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+.map-desc { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; }
+.map-year {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: var(--mist);
+  padding: 3px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+}
+
+/* ═══════════════════════════════════════════════
+   COMMUNITY / EMAIL SIGNUP
+═══════════════════════════════════════════════ */
+#community {
+  background: linear-gradient(135deg, var(--nebula), var(--purple-dim));
+  text-align: center;
+  padding: 100px 48px;
+}
+.community-inner { max-width: 680px; margin: 0 auto; }
+.community-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(216,48,37,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.email-form {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+}
+.email-input {
+  flex: 1;
+  min-width: 240px;
+  background: rgba(255,248,240,0.06);
+  border: 1px solid var(--card-border);
+  border-radius: 50px;
+  padding: 14px 24px;
+  color: var(--text-bright);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s, background 0.3s;
+}
+.email-input::placeholder { color: var(--text-dim); }
+.email-input:focus { border-color: rgba(232,105,10,0.5); background: rgba(255,248,240,0.09); }
+.email-submit {
+  background: linear-gradient(135deg, var(--flame-red), var(--ember));
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.email-submit:hover { box-shadow: 0 8px 32px var(--glow-orange); transform: translateY(-2px); }
+.email-disclaimer { font-size: 0.72rem; color: var(--text-dim); margin-top: 16px; }
+.social-links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-glass);
+  border: 1px solid var(--card-border);
+  border-radius: 50px;
+  padding: 10px 24px;
+  color: var(--text-mid);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+  backdrop-filter: blur(8px);
+}
+.social-link:hover { border-color: rgba(232,105,10,0.4); color: var(--text-bright); background: var(--mist); transform: translateY(-3px); }
+
+/* ═══════════════════════════════════════════════
+   LORE SECTION
+═══════════════════════════════════════════════ */
+#lore {
+  background: linear-gradient(180deg, var(--purple-dim) 0%, var(--void) 100%);
+}
+.lore-inner { max-width: 900px; margin: 0 auto; }
+.lore-scroll {
+  position: relative;
+  padding-left: 48px;
+  margin-top: 48px;
+}
+.lore-scroll::before {
+  content: '';
+  position: absolute;
+  left: 16px; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--ember), var(--gold), transparent);
+}
+.lore-entry {
+  position: relative;
+  margin-bottom: 48px;
+  padding: 32px;
+  background: var(--card-glass);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  transition: all 0.4s;
+}
+.lore-entry:hover { border-color: rgba(232,105,10,0.3); transform: translateX(8px); }
+.lore-entry::before {
+  content: '';
+  position: absolute;
+  left: -40px; top: 32px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--ember);
+  box-shadow: 0 0 20px var(--ember);
+  border: 3px solid var(--deep);
+}
+.lore-chapter {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 8px;
+}
+.lore-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.lore-text {
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  line-height: 1.85;
+}
+.lore-text em { color: var(--gold); font-style: normal; }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  background: var(--deep);
+  border-top: 1px solid var(--card-border);
+  padding: 60px 48px 40px;
+  position: relative;
+  z-index: 10;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.3rem;
+  background: linear-gradient(90deg, var(--ember), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+.footer-brand-desc {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  max-width: 280px;
+  margin-bottom: 24px;
+}
+.footer-col-title {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--text-bright); }
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  border-top: 1px solid var(--card-border);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE NAV
+═══════════════════════════════════════════════ */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(8,4,18,0.98);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  backdrop-filter: blur(20px);
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.8rem;
+  color: var(--text-bright);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+}
+.mobile-menu a:hover { color: var(--ember); }
+.mobile-close {
+  position: absolute;
+  top: 24px; right: 32px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-mid);
+  background: none;
+  border: none;
+  transition: color 0.3s;
+}
+.mobile-close:hover { color: var(--text-bright); }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  section { padding: 80px 24px; }
+  .story-grid { grid-template-columns: 1fr; gap: 48px; }
+  .chars-grid { grid-template-columns: repeat(2, 1fr); }
+  .merch-grid { grid-template-columns: 1fr; }
+  .universe-map { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+@media (max-width: 600px) {
+  .hero-title { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+  .chars-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr; }
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; }
+}
+
+/* ═══════════════════════════════════════════════
+   TOAST NOTIFICATION
+═══════════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: linear-gradient(135deg, var(--flame-red), var(--ember));
+  color: white;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  z-index: 9999;
+  transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  box-shadow: 0 8px 40px rgba(216,48,37,0.4);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Particle canvas -->
+<canvas id="cosmos"></canvas>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobile()">✕</button>
+  <a href="#story" onclick="closeMobile()">Story</a>
+  <a href="#characters" onclick="closeMobile()">Characters</a>
+  <a href="#merch" onclick="closeMobile()">Shop</a>
+  <a href="#lore" onclick="closeMobile()">Lore</a>
+  <a href="#community" onclick="closeMobile()">Join</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">FameThrower ⭐</a>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#characters">Characters</a></li>
+    <li><a href="#merch">Shop</a></li>
+    <li><a href="#lore">Lore</a></li>
+    <li><a href="#community" class="nav-cta">Join the Squad ⭐</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+
+<!-- ════ HERO ════ -->
+<section id="hero">
+  <div class="hero-eyebrow">⭐ The FameThrower Universe — Est. 2026 ⭐</div>
+  <h1 class="hero-title">
+    <span class="line-flame">FameThrower</span>
+    <span class="line-universe">Universe</span>
+  </h1>
+  <p class="hero-tagline">
+    She doesn't throw flames.<br>
+    She throws <strong>FAME.</strong>
+  </p>
+  <div class="hero-ctas">
+    <a href="#characters" class="btn-primary">🔥 Meet the Squad</a>
+    <a href="#merch" class="btn-ghost">⭐ Shop Merch</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll to enter</span>
+  </div>
+</section>
+
+<!-- ════ TICKER ════ -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker">
+    <div class="ticker-item">NEW DROP: FameThrower Sticker Pack</div>
+    <div class="ticker-item">She doesn't throw flames — she throws FAME</div>
+    <div class="ticker-item">Original anime characters · Official merch</div>
+    <div class="ticker-item">The Fame Squad — 5 characters · Launching 2026</div>
+    <div class="ticker-item">Join the FameThrower Fan Club — link below</div>
+    <div class="ticker-item">NEW DROP: FameThrower Sticker Pack</div>
+    <div class="ticker-item">She doesn't throw flames — she throws FAME</div>
+    <div class="ticker-item">Original anime characters · Official merch</div>
+    <div class="ticker-item">The Fame Squad — 5 characters · Launching 2026</div>
+    <div class="ticker-item">Join the FameThrower Fan Club — link below</div>
+  </div>
+</div>
+
+<!-- ════ STORY ════ -->
+<section id="story">
+  <div class="story-grid">
+    <div class="story-visual reveal">
+      <div class="story-char-frame">
+        <span class="story-char-emoji">🔥</span>
+      </div>
+      <div class="story-badge">
+        <div class="story-badge-title">Power Level</div>
+        <div class="story-badge-val">LEGENDARY</div>
+      </div>
+    </div>
+    <div class="story-text">
+      <span class="section-label reveal">Origin Story</span>
+      <h2 class="section-heading reveal reveal-delay-1">
+        Born in the <span class="accent">Ember Districts</span><br>of Elysara
+      </h2>
+      <div class="divider reveal reveal-delay-2"></div>
+      <blockquote class="story-quote reveal reveal-delay-2">
+        "Dual-element children are born once per century. The moment she waved that wand, everyone who saw it felt suddenly, inexplicably... famous."
+      </blockquote>
+      <p class="section-body reveal reveal-delay-3">
+        In the world of ELYSARA, Fame is a literal magical force. Those who can harness it become FameCasters. The most powerful FameCaster who ever lived — the one who started with nothing in the poorest district of the realm — is FameThrower herself.
+      </p>
+      <div class="story-stats reveal reveal-delay-4">
+        <div class="stat-box">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Characters</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Elements Each</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Fame Potential</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Universe</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CHARACTERS ════ -->
+<section id="characters">
+  <div class="chars-header">
+    <div>
+      <span class="section-label reveal">The Fame Squad</span>
+      <h2 class="section-heading reveal reveal-delay-1">Meet the <span class="accent">Characters</span></h2>
+    </div>
+    <a href="#merch" class="btn-ghost reveal reveal-delay-2">Shop all merch →</a>
+  </div>
+  <div class="chars-grid">
+
+    <div class="char-card featured reveal" style="--char-accent:rgba(232,105,10,0.5); --char-glow:rgba(232,105,10,0.15);">
+      <span class="char-emoji-wrap">🔥</span>
+      <div class="char-name-tag" style="color:#F5C518">FameThrower</div>
+      <div class="char-element">Fire + Fame</div>
+      <div class="char-power-pill" style="background:linear-gradient(135deg,#D93025,#E8690A)">Instant Iconic Status</div>
+    </div>
+
+    <div class="char-card reveal reveal-delay-1" style="--char-accent:rgba(93,173,226,0.5); --char-glow:rgba(93,173,226,0.12);">
+      <span class="char-coming">Month 2</span>
+      <span class="char-emoji-wrap">💧</span>
+      <div class="char-name-tag" style="color:#5DADE2">AquaStrike</div>
+      <div class="char-element">Water + Lightning</div>
+      <div class="char-power-pill" style="background:linear-gradient(135deg,#1A5276,#2980B9)">Goes Viral</div>
+    </div>
+
+    <div class="char-card reveal reveal-delay-2" style="--char-accent:rgba(244,208,63,0.5); --char-glow:rgba(125,60,152,0.12);">
+      <span class="char-coming">Month 3</span>
+      <span class="char-emoji-wrap">⚡</span>
+      <div class="char-name-tag" style="color:#F4D03F">VoltCaster</div>
+      <div class="char-element">Lightning + Sound</div>
+      <div class="char-power-pill" style="background:linear-gradient(135deg,#6C3483,#9B59B6)">Legendary Moments</div>
+    </div>
+
+    <div class="char-card reveal reveal-delay-3" style="--char-accent:rgba(88,214,141,0.5); --char-glow:rgba(30,132,73,0.12);">
+      <span class="char-coming">Month 3</span>
+      <span class="char-emoji-wrap">🌿</span>
+      <div class="char-name-tag" style="color:#58D68D">TerraBoom</div>
+      <div class="char-element">Earth + Explosion</div>
+      <div class="char-power-pill" style="background:linear-gradient(135deg,#145A32,#1E8449)">Builds Legacy</div>
+    </div>
+
+    <div class="char-card reveal reveal-delay-4" style="--char-accent:rgba(195,155,211,0.5); --char-glow:rgba(155,89,182,0.12);">
+      <span class="char-coming">Mystery Drop</span>
+      <span class="char-emoji-wrap">🖤</span>
+      <div class="char-name-tag" style="color:#C39BD3">VoidWhisper</div>
+      <div class="char-element">Shadow + Stars</div>
+      <div class="char-power-pill" style="background:linear-gradient(135deg,#1C2833,#9B59B6)">Creates Obsession</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ MERCH ════ -->
+<section id="merch">
+  <div class="merch-inner">
+    <span class="section-label reveal">Official Merchandise</span>
+    <h2 class="section-heading reveal reveal-delay-1">Wear the <span class="accent">Fame</span></h2>
+    <p class="section-body reveal reveal-delay-2">Every piece is original, limited, and designed to make you look like you threw fame all over yourself. Because you did.</p>
+
+    <div class="merch-grid">
+
+      <div class="merch-card reveal">
+        <div class="merch-badge">⭐ Best Seller</div>
+        <div class="merch-img" style="background:linear-gradient(135deg,rgba(216,48,37,0.2),rgba(245,197,24,0.1))">✂️</div>
+        <div class="merch-body">
+          <div class="merch-tag">Stickers</div>
+          <div class="merch-name">FameThrower Die-Cut Sticker</div>
+          <div class="merch-desc">Waterproof, UV-resistant, and designed to make your laptop legendary. Chibi FameThrower in full flame glory.</div>
+          <div class="merch-footer">
+            <div class="merch-price">$5.99</div>
+            <a href="https://etsy.com" target="_blank" class="merch-btn">Shop Now →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="merch-card reveal reveal-delay-1">
+        <div class="merch-badge">🔥 New Drop</div>
+        <div class="merch-img" style="background:linear-gradient(135deg,rgba(232,105,10,0.15),rgba(45,16,96,0.2))">👕</div>
+        <div class="merch-body">
+          <div class="merch-tag">Apparel</div>
+          <div class="merch-name">FameThrower Premium Hoodie</div>
+          <div class="merch-desc">Dark colourway. Flame art. Premium heavyweight fabric. The hoodie that makes people ask "where did you get that?"</div>
+          <div class="merch-footer">
+            <div class="merch-price">$59.99</div>
+            <a href="https://etsy.com" target="_blank" class="merch-btn">Shop Now →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="merch-card reveal reveal-delay-2">
+        <div class="merch-img" style="background:linear-gradient(135deg,rgba(245,197,24,0.12),rgba(216,48,37,0.08))">📌</div>
+        <div class="merch-body">
+          <div class="merch-tag">Collectibles</div>
+          <div class="merch-name">FameThrower Enamel Pin</div>
+          <div class="merch-desc">Hard enamel, gold plating, rubber clutch back. The flame hair makes an iconic pin silhouette. Limited quantities.</div>
+          <div class="merch-footer">
+            <div class="merch-price">$14.99</div>
+            <a href="https://etsy.com" target="_blank" class="merch-btn">Shop Now →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="merch-card reveal reveal-delay-3">
+        <div class="merch-img" style="background:linear-gradient(135deg,rgba(45,16,96,0.3),rgba(155,89,182,0.1))">🖼️</div>
+        <div class="merch-body">
+          <div class="merch-tag">Art Prints</div>
+          <div class="merch-name">Power Mode Poster (A3)</div>
+          <div class="merch-desc">Full-body FameThrower against a deep cosmic background. Gallery-quality giclée print. Ships in a protective tube.</div>
+          <div class="merch-footer">
+            <div class="merch-price">$24.99</div>
+            <a href="https://etsy.com" target="_blank" class="merch-btn">Shop Now →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="merch-card reveal reveal-delay-4">
+        <div class="merch-img" style="background:linear-gradient(135deg,rgba(232,105,10,0.1),rgba(8,4,18,0.3))">⬛</div>
+        <div class="merch-body">
+          <div class="merch-tag">Standees</div>
+          <div class="merch-name">Acrylic Character Standee</div>
+          <div class="merch-desc">Double-sided acrylic desk standee. FameThrower floating just like she does in Elysara. The perfect desk companion.</div>
+          <div class="merch-footer">
+            <div class="merch-price">$19.99</div>
+            <a href="https://etsy.com" target="_blank" class="merch-btn">Shop Now →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="merch-card reveal reveal-delay-5">
+        <div class="merch-badge" style="background:linear-gradient(135deg,#1A5276,#6C3483)">🌟 Coming Soon</div>
+        <div class="merch-img" style="background:linear-gradient(135deg,rgba(93,173,226,0.1),rgba(45,16,96,0.2))">🎁</div>
+        <div class="merch-body">
+          <div class="merch-tag">Bundle</div>
+          <div class="merch-name">Fame Squad Starter Pack</div>
+          <div class="merch-desc">Sticker + pin + standee bundle. Everything you need to declare your allegiance to the Fame Squad. Launching Month 2.</div>
+          <div class="merch-footer">
+            <div class="merch-price">$34.99</div>
+            <a href="#community" class="merch-btn">Notify Me →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top:48px;" class="reveal">
+      <a href="https://etsy.com" target="_blank" class="btn-primary">🛒 View Full Shop on Etsy</a>
+      &nbsp;&nbsp;
+      <a href="https://ebay.com" target="_blank" class="btn-ghost">🏷️ Auction Items on eBay</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ UNIVERSE MAP ════ -->
+<section id="universe">
+  <div class="universe-inner">
+    <span class="section-label reveal">The Big Picture</span>
+    <h2 class="section-heading reveal reveal-delay-1">Universe <span class="accent">Expansion</span></h2>
+    <p class="section-body reveal reveal-delay-2" style="margin:0 auto">FameThrower is just the beginning. The FameThrower Universe has a full three-year expansion plan — from stickers to webcomics to animation.</p>
+
+    <div class="universe-map">
+      <div class="map-node reveal" style="--node-glow:rgba(232,105,10,0.25)">
+        <span class="map-icon">⭐</span>
+        <div class="map-title">Year 1 — Establish</div>
+        <div class="map-desc">Launch all 5 Fame Squad characters. Build sticker, pin, and poster product lines. Reach 10,000 followers.</div>
+        <span class="map-year">2026</span>
+      </div>
+      <div class="map-node reveal reveal-delay-2" style="--node-glow:rgba(155,89,182,0.25)">
+        <span class="map-icon">📖</span>
+        <div class="map-title">Year 2 — Expand</div>
+        <div class="map-desc">Launch villain characters. Begin "FameThrower: Origins" webcomic series. First convention appearances.</div>
+        <span class="map-year">2027</span>
+      </div>
+      <div class="map-node reveal reveal-delay-4" style="--node-glow:rgba(245,197,24,0.2)">
+        <span class="map-icon">🎬</span>
+        <div class="map-title">Year 3 — Go Big</div>
+        <div class="map-desc">Animated YouTube series. Webtoon distribution deal. Plush toys. Convention exclusives. Media licensing.</div>
+        <span class="map-year">2028</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ LORE ════ -->
+<section id="lore">
+  <div class="lore-inner">
+    <span class="section-label reveal">The World of Elysara</span>
+    <h2 class="section-heading reveal reveal-delay-1">Read the <span class="accent">Lore</span></h2>
+
+    <div class="lore-scroll">
+
+      <div class="lore-entry reveal">
+        <div class="lore-chapter">Chapter One</div>
+        <div class="lore-title">The Girl from the Ember Districts</div>
+        <div class="lore-text">In the world of Elysara, Fame is not a feeling. It is a <em>force</em> — a tangible, cosmic energy that flows through the realm like electricity through wire. Those who can channel it become FameCasters. Those who cannot spend their lives invisible. Ignia Solara was born invisible. She was born in the Ember Districts — the poorest corner of a world already divided sharply between the famous and the forgotten.</div>
+      </div>
+
+      <div class="lore-entry reveal reveal-delay-1">
+        <div class="lore-chapter">Chapter Two</div>
+        <div class="lore-title">The Wand That Changed Everything</div>
+        <div class="lore-text">She was seven years old when she first picked up a fallen wand from the grey cobblestones. No one had dropped it for her. No one had intended her to find it. But the moment her fingers closed around the dark graphite shaft, <em>purple stars</em> erupted from the tip — and every person in the street below felt, for one impossible, inexplicable moment, like the most famous person in the world. Dual-element children — those who carry both Fire and Fame — are born once per century.</div>
+      </div>
+
+      <div class="lore-entry reveal reveal-delay-2">
+        <div class="lore-chapter">Chapter Three</div>
+        <div class="lore-title">The Fame Squad Assembles</div>
+        <div class="lore-text">She did not build her team. Her team <em>found</em> her. AquaStrike arrived first — cool, precise, already going viral before anyone knew her name. VoltCaster showed up making the loudest possible entrance. TerraBoom appeared quietly, without drama, and somehow that was the most dramatic thing of all. And VoidWhisper... VoidWhisper simply <em>was there one day</em>, as though she had always been. Nobody remembers her arriving. That's exactly how she wanted it.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ COMMUNITY ════ -->
+<section id="community">
+  <div class="community-glow"></div>
+  <div class="community-inner">
+    <span class="section-label reveal">Join the Universe</span>
+    <h2 class="section-heading reveal reveal-delay-1">Get <span class="accent">Famous</span> With Us</h2>
+    <p class="section-body reveal reveal-delay-2" style="margin:0 auto">Be the first to know when new characters drop, exclusive merch launches, and lore updates. Fan Club members get 10% off their first order.</p>
+
+    <div class="email-form reveal reveal-delay-3">
+      <input type="email" class="email-input" placeholder="your@email.com" id="emailInput">
+      <button class="email-submit" onclick="handleSignup()">Join the Squad ⭐</button>
+    </div>
+    <p class="email-disclaimer reveal">No spam. Just Fame. Unsubscribe anytime.</p>
+
+    <div class="social-links reveal reveal-delay-4">
+      <a href="https://instagram.com" target="_blank" class="social-link">📸 Instagram</a>
+      <a href="https://youtube.com" target="_blank" class="social-link">▶️ YouTube</a>
+      <a href="https://etsy.com" target="_blank" class="social-link">🛒 Etsy Shop</a>
+      <a href="https://ebay.com" target="_blank" class="social-link">🏷️ eBay Store</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">FameThrower Universe</div>
+        <div class="footer-brand-desc">Original anime-inspired characters born at the crossroads of gaming culture, elemental fantasy, and pop stardom. All characters original and owned by FameThrower Universe © 2026.</div>
+        <a href="#community" class="btn-primary" style="font-size:0.82rem; padding:11px 24px; display:inline-flex;">Join Fan Club ⭐</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Characters</div>
+        <ul class="footer-links">
+          <li><a href="#characters">FameThrower</a></li>
+          <li><a href="#characters">AquaStrike</a></li>
+          <li><a href="#characters">VoltCaster</a></li>
+          <li><a href="#characters">TerraBoom</a></li>
+          <li><a href="#characters">VoidWhisper</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="https://etsy.com" target="_blank">Etsy Store</a></li>
+          <li><a href="https://ebay.com" target="_blank">eBay Auctions</a></li>
+          <li><a href="#merch">Stickers</a></li>
+          <li><a href="#merch">Hoodies</a></li>
+          <li><a href="#merch">Enamel Pins</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Universe</div>
+        <ul class="footer-links">
+          <li><a href="#story">Origin Story</a></li>
+          <li><a href="#lore">Lore</a></li>
+          <li><a href="#universe">Roadmap</a></li>
+          <li><a href="#community">Fan Club</a></li>
+          <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 FameThrower Universe. All characters original & proprietary.</span>
+      <span>Made with 🔥 and a wand full of ⭐</span>
+      <span>"She doesn't throw flames — she throws FAME."</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast">⭐ You're in the Fan Club! Welcome to the Fame Squad!</div>
+
+<script>
+/* ── Cursor ─────────────────────────────────── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx+'px'; cur.style.top = my+'px'; });
+function animRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); }
+animRing();
+document.querySelectorAll('a,button,.char-card,.merch-card,.map-node').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.width='20px'; cur.style.height='20px'; ring.style.width='56px'; ring.style.height='56px'; ring.style.borderColor='rgba(245,197,24,0.7)'; });
+  el.addEventListener('mouseleave', () => { cur.style.width='12px'; cur.style.height='12px'; ring.style.width='36px'; ring.style.height='36px'; ring.style.borderColor='rgba(232,105,10,0.5)'; });
+});
+
+/* ── Particle Cosmos ─────────────────────────── */
+const canvas = document.getElementById('cosmos');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [], mouse = {x:0, y:0};
+function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random()*W;
+    this.y = Math.random()*H;
+    this.size = Math.random()*1.8+0.3;
+    this.speed = Math.random()*0.3+0.05;
+    this.angle = Math.random()*Math.PI*2;
+    this.opacity = Math.random()*0.6+0.1;
+    this.color = Math.random() > 0.7
+      ? `rgba(232,105,10,${this.opacity})`
+      : Math.random() > 0.5
+        ? `rgba(245,197,24,${this.opacity*0.6})`
+        : `rgba(200,168,255,${this.opacity*0.5})`;
+    this.wobble = Math.random()*0.02-0.01;
+  }
+  update() {
+    this.angle += this.wobble;
+    this.x += Math.cos(this.angle)*this.speed;
+    this.y += Math.sin(this.angle)*this.speed - 0.08;
+    const dx = mouse.x - this.x, dy = mouse.y - this.y;
+    const dist = Math.sqrt(dx*dx+dy*dy);
+    if (dist < 120) { this.x -= dx*0.02; this.y -= dy*0.02; }
+    if (this.y < -10 || this.x < -10 || this.x > W+10) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+}
+for (let i = 0; i < 180; i++) particles.push(new Particle());
+function animCosmos() {
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animCosmos);
+}
+animCosmos();
+
+/* ── Nav scroll ──────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', scrollY > 60);
+});
+
+/* ── Scroll reveal ───────────────────────────── */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ── Mobile menu ─────────────────────────────── */
+function openMobile() { document.getElementById('mobileMenu').classList.add('open'); }
+function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+/* ── Email signup ────────────────────────────── */
+function handleSignup() {
+  const val = document.getElementById('emailInput').value.trim();
+  if (!val || !val.includes('@')) {
+    document.getElementById('emailInput').style.borderColor = 'rgba(216,48,37,0.8)';
+    setTimeout(() => document.getElementById('emailInput').style.borderColor = '', 2000);
+    return;
+  }
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  document.getElementById('emailInput').value = '';
+  setTimeout(() => toast.classList.remove('show'), 4000);
+}
+document.getElementById('emailInput').addEventListener('keypress', e => { if(e.key==='Enter') handleSignup(); });
+
+/* ── Active nav link ─────────────────────────── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if(scrollY >= s.offsetTop - 200) current = s.id; });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+current ? 'var(--ember)' : '';
+  });
+});
+</script>
+</body>
+</html>
